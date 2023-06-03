@@ -5,7 +5,7 @@ public class ThreadStop {
         Thread thread = new Thread(
                 () -> {
                     int count = 0;
-                    while(!Thread.currentThread().isInterrupted()) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         System.out.println(count++);
                     }
                 }
