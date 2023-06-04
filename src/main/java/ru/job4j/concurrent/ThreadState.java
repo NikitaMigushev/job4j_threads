@@ -14,8 +14,8 @@ public class ThreadState {
         );
         first.start();
         second.start();
-        while (first.getState() != Thread.State.TERMINATED ||
-                second.getState() != Thread.State.TERMINATED) {
+        while (first.getState() != Thread.State.TERMINATED
+                || second.getState() != Thread.State.TERMINATED) {
             System.out.println("First thread state is: " + first.getState());
             System.out.println("Second thread state is: " + second.getState());
         }
