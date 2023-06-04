@@ -1,4 +1,4 @@
-package ru.job4j.thread;
+package ru.job4j.threads;
 
 import java.io.*;
 import java.net.URL;
