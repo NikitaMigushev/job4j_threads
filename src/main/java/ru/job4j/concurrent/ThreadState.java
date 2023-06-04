@@ -15,7 +15,8 @@ public class ThreadState {
         first.start();
         second.start();
         while (first.isAlive() || second.isAlive()) {
-
+            System.out.println("First thread state is: " + first.getState());
+            System.out.println("Second thread state is: " + second.getState());
         }
         System.out.println("Work is finished");
     }
