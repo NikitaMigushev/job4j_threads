@@ -21,8 +21,10 @@ public class UserCache {
     }
 
     public List<User> findAll() {
-        synchronized (users) {
-            return new ArrayList<>(users.values());
+        List<User> userCopies = new ArrayList<>();
+        for (User user : users.values()) {
+            userCopies.add(User.of(user.getName()));
         }
+        return userCopies;
     }
 }
