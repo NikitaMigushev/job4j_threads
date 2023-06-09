@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
-        File file = new File("./data/example.txt");  // Replace with your file path
+        File file = new File("./data/example.txt");
         FileParser fileParser = new FileParser(file);
         try {
             String contentWithoutUnicode = fileParser.getContentWithoutUnicode();
