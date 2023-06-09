@@ -11,20 +11,17 @@ public class FileParser {
     }
 
     public String getContent(Predicate<Character> filter) throws IOException {
-        try (InputStream i = new FileInputStream(file);
-             ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-            byte[] buffer = new byte[4096];
-            int bytesRead;
-            while ((bytesRead = i.read(buffer)) != -1) {
-                for (int j = 0; j < bytesRead; j++) {
-                    char ch = (char) buffer[j];
-                    if (filter.test(ch)) {
-                        output.write(buffer[j]);
-                    }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            int data;
+            while ((data = reader.read()) != -1) {
+                char ch = (char) data;
+                if (filter.test(ch)) {
+                    sb.append(ch);
                 }
             }
-            return output.toString();
         }
+        return sb.toString();
     }
 
     public String getContentWithoutUnicode() throws IOException {
