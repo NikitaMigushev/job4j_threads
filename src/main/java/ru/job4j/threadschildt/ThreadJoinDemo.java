@@ -29,9 +29,9 @@ public class ThreadJoinDemo implements Runnable {
         ThreadJoinDemo t1 = new ThreadJoinDemo("Один");
         ThreadJoinDemo t2 = new ThreadJoinDemo("Два");
         ThreadJoinDemo t3 = new ThreadJoinDemo("Три");
-        System.out.println("Поток Один запущен: " + t1.t.isAlive() );
-        System.out.println("Поток Два запущен: " + t2.t.isAlive() );
-        System.out.println("Поток Три запущен: " + t3.t.isAlive() );
+        System.out.println("Поток Один запущен: " + t1.t.isAlive());
+        System.out.println("Поток Два запущен: " + t2.t.isAlive());
+        System.out.println("Поток Три запущен: " + t3.t.isAlive());
 
         try {
             System.out.println("Ожидание завершения потоков.");
@@ -41,9 +41,9 @@ public class ThreadJoinDemo implements Runnable {
         } catch (InterruptedException e) {
             System.out.println("Главный поток прерван");
         }
-        System.out.println("Поток Один запущен: " + t1.t.isAlive() );
-        System.out.println("Поток Два запущен: " + t2.t.isAlive() );
-        System.out.println("Поток Три запущен: " + t3.t.isAlive() );
+        System.out.println("Поток Один запущен: " + t1.t.isAlive());
+        System.out.println("Поток Два запущен: " + t2.t.isAlive());
+        System.out.println("Поток Три запущен: " + t3.t.isAlive());
         System.out.println("Главный поток завершен.");
     }
 }

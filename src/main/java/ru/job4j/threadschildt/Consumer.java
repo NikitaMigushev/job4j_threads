@@ -5,7 +5,7 @@ public class Consumer implements Runnable {
 
     public Consumer(Q q) {
         this.q = q;
-        new Thread (this, "Потребитель").start();
+        new Thread(this, "Потребитель").start();
     }
 
     @Override

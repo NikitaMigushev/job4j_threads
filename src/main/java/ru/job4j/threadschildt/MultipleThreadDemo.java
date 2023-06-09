@@ -14,7 +14,7 @@ public class MultipleThreadDemo implements Runnable {
     @Override
     public void run() {
         try {
-            for (int i = 5; i > 0 ; i--) {
+            for (int i = 5; i > 0; i--) {
                 System.out.println(name + ": " + i);
                 Thread.sleep(1000);
 
@@ -22,7 +22,7 @@ public class MultipleThreadDemo implements Runnable {
         } catch (InterruptedException e) {
             System.out.println(name + " прерван");
         }
-        System.out.println(name + " завершен." );
+        System.out.println(name + " завершен.");
     }
 
     public static void main(String[] args) {

@@ -23,11 +23,11 @@ public class Q {
             try {
                 wait();
             } catch (InterruptedException e) {
-                System.out.println("Исключение типа InterruptredException перехвачено" );
+                System.out.println("Исключение типа InterruptredException перехвачено");
             }
         }
         this.n = n;
-        valueSet = true;;
+        valueSet = true;
         System.out.println("Отправлено: " + n);
         notify();
     }
