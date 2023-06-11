@@ -2,44 +2,44 @@ package ru.job4j.buffer;
 
 import ru.job4j.SimpleBlockingQueue;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class ParallelSearch {
-    public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);
-        AtomicBoolean isProducerFinished = new AtomicBoolean(false);
-
-        final Thread consumer = new Thread(
-                () -> {
-                    while (!isProducerFinished.get() || !queue.isEmpty()) {
-                        try {
-                            Integer value = queue.poll();
-                            if (value != null) {
-                                System.out.println(value);
-                            } else {
-                                Thread.sleep(100);
-                            }
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        }
-                    }
-                }
-        );
-        consumer.start();
-        new Thread(
+    public static void main(String[] args) throws InterruptedException {
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(10);
+        final Thread producer = new Thread(
                 () -> {
                     for (int index = 0; index != 3; index++) {
                         try {
                             queue.offer(index);
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            break;
+                            e.printStackTrace();
                         }
                     }
-                    isProducerFinished.set(true);
-                    consumer.interrupt();
+                    try {
+                        queue.offer(null);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-        ).start();
+        );
+        final Thread consumer = new Thread(
+                () -> {
+                    while (true) {
+                        try {
+                            Integer value = queue.poll();
+                            if (value == null) {
+                                break;
+                            }
+                            System.out.println(value);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+        );
+        producer.start();
+        consumer.start();
+        consumer.join();
     }
 }
