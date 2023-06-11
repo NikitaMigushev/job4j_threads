@@ -33,8 +33,8 @@ public class AccountStorage {
                     && fromAccount.amount() >= amount) {
                 Account updatedFromAccount = new Account(fromAccount.id(), fromAccount.amount() - amount);
                 Account updatedToAccount = new Account(toAccount.id(), toAccount.amount() + amount);
-                accounts.put(fromId, updatedFromAccount);
-                accounts.put(toId, updatedToAccount);
+                update(updatedFromAccount);
+                update(updatedToAccount);
                 result = true;
             }
         }
