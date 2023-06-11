@@ -15,16 +15,11 @@ public class ParallelSearch {
                             e.printStackTrace();
                         }
                     }
-                    try {
-                        queue.offer(null);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
         );
         final Thread consumer = new Thread(
                 () -> {
-                    while (true) {
+                    while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
                         try {
                             Integer value = queue.poll();
                             if (value == null) {
@@ -32,7 +27,7 @@ public class ParallelSearch {
                             }
                             System.out.println(value);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            System.out.println("Consumer stop");
                             Thread.currentThread().interrupt();
                         }
                     }
@@ -40,6 +35,8 @@ public class ParallelSearch {
         );
         producer.start();
         consumer.start();
+        producer.join();
+        consumer.interrupt();
         consumer.join();
     }
 }
