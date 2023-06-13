@@ -34,10 +34,11 @@ class EmailNotificationTest {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        String ls = System.lineSeparator();
 
-        String expectedOutput = "Sending email to: john@example.com\r\n"
-                + "Subject: Notification John to email john@example.com\r\n"
-                + "Body: Add a new event to John\r\n";
+        String expectedOutput = "Sending email to: john@example.com" + ls
+                + "Subject: Notification John to email john@example.com" + ls
+                + "Body: Add a new event to John" + ls;
         assertThat(outputStream.toString()).isEqualTo(expectedOutput);
     }
 }
