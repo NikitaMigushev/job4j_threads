@@ -4,10 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class EmailNotification {
-    private final ExecutorService pool;
+    private final ExecutorService pool = Executors.newFixedThreadPool(10);;
 
     public EmailNotification() {
-        pool = Executors.newFixedThreadPool(10);
     }
 
     public void emailTo(User user) {
@@ -21,5 +20,9 @@ public class EmailNotification {
         System.out.println("Sending email to: " + email);
         System.out.println("Subject: " + subject);
         System.out.println("Body: " + body);
+    }
+
+    public void close() {
+        pool.shutdown();
     }
 }

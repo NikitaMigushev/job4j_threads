@@ -23,6 +23,7 @@ class EmailNotificationTest {
     @AfterEach
     public void tearDown() {
         System.setOut(originalOut);
+        emailNotification.close();
     }
 
     @Test
