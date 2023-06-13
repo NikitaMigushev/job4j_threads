@@ -19,7 +19,7 @@ class ParallelSearchTest {
     }
 
     @Test
-    public void testParallelIndexOf_StringArray_Found() {
+    public void whenParallelIndexOfStringArrayFound() {
         String[] array = {"apple", "banana", "cherry", "date", "elderberry"};
         int targetIndex = ParallelSearch.parallelIndexOf(array, "cherry");
         Assertions.assertThat(targetIndex).isEqualTo(2);
