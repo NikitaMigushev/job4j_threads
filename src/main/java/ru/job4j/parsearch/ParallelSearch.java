@@ -39,23 +39,23 @@ public class ParallelSearch {
         @Override
         protected Integer compute() {
             if (end - start <= THRESHOLD) {
-                return linearIndexOfRange(array, target, start, end);
+                return linearIndexOfRange();
+            }
+            int mid = (start + end) / 2;
+            SearchTask<T> leftTask = new SearchTask<>(array, target, start, mid);
+            SearchTask<T> rightTask = new SearchTask<>(array, target, mid, end);
+            leftTask.fork();
+            rightTask.fork();
+            int leftResult = leftTask.join();
+            int rightResult = rightTask.join();
+            if (leftResult != -1 || rightResult != -1) {
+                return Math.max(leftResult, rightResult);
             } else {
-                int mid = (start + end) / 2;
-                SearchTask<T> leftTask = new SearchTask<>(array, target, start, mid);
-                SearchTask<T> rightTask = new SearchTask<>(array, target, mid, end);
-                leftTask.fork();
-                int rightResult = rightTask.compute();
-                int leftResult = leftTask.join();
-                if (leftResult != -1) {
-                    return leftResult;
-                } else {
-                    return rightResult;
-                }
+                return rightResult;
             }
         }
 
-        private int linearIndexOfRange(T[] array, T target, int start, int end) {
+        private int linearIndexOfRange() {
             for (int i = start; i < end; i++) {
                 if (array[i] != null && array[i].equals(target)) {
                     return i;

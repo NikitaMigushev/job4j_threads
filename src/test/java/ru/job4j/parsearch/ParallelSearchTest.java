@@ -12,6 +12,13 @@ class ParallelSearchTest {
     }
 
     @Test
+    public void whenParallelIndexOfLastIntegerArrayFound() {
+        Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int targetIndex = ParallelSearch.parallelIndexOf(array, 10);
+        Assertions.assertThat(targetIndex).isEqualTo(9);
+    }
+
+    @Test
     public void whenParallelIndexOfIntegerArrayNotFound() {
         Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int targetIndex = ParallelSearch.parallelIndexOf(array, 11);
