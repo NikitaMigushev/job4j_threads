@@ -21,4 +21,23 @@ public class QueueServiceTest {
         );
         assertThat(result.text(), is("temperature=18"));
     }
+
+    @Test
+    public void whenPostThenGetQueueTwoTopics() {
+        QueueService queueService = new QueueService();
+        queueService.process(
+                new Req("POST", "queue", "weather", "temperature=18")
+        );
+        queueService.process(
+                new Req("POST", "queue", "travel", "Austria")
+        );
+        Resp resultWeather = queueService.process(
+                new Req("GET", "queue", "weather", null)
+        );
+        Resp resultTravel = queueService.process(
+                new Req("GET", "queue", "travel", null)
+        );
+        assertThat(resultWeather.text(), is("temperature=18"));
+        assertThat(resultTravel.text(), is("Austria"));
+    }
 }

@@ -31,4 +31,29 @@ class TopicServiceTest {
         assertThat(result1.text()).isEqualTo("temperature=18");
         assertThat(result2.text()).isEqualTo("");
     }
+
+    @Test
+    public void whenTopics() {
+        TopicService topicService = new TopicService();
+        String paramForSubscriber1 = "client407";
+        String paramForSubscriber2 = "client6565";
+        String paramForSubscriber3 = "client1";
+        topicService.process(
+                new Req("GET", "topic", "weather", paramForSubscriber1));
+        topicService.process(
+                new Req("POST", "topic", "weather", "temperature=18"
+                ));
+        Resp result1 = topicService.process(
+                new Req("GET", "topic", "weather", paramForSubscriber1)
+        );
+        Resp result2 = topicService.process(
+                new Req("GET", "topic", "weather", paramForSubscriber2)
+        );
+        Resp result3 = topicService.process(
+                new Req("GET", "topic", "weather", paramForSubscriber3)
+        );
+        assertThat(result1.text()).isEqualTo("temperature=18");
+        assertThat(result2.text()).isEqualTo("");
+        assertThat(result3.text()).isEqualTo("");
+    }
 }
