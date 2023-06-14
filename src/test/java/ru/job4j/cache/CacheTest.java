@@ -29,14 +29,15 @@ class CacheTest {
         Base updateModel = new Base(1, 1);
         updateModel.setName("Test2");
         cache.update(updateModel);
-        assertThat(updateModel.getVersion()).isEqualTo(2);
+        assertThat(cache.get(1).getName()).isEqualTo("Test2");
+        assertThat(cache.get(1).getVersion()).isEqualTo(2);
     }
 
     @Test
     public void whenUpdateSameVersionIncrement() {
         Base updateModel = new Base(1, 1);
         cache.update(updateModel);
-        assertThat(updateModel.getVersion()).isEqualTo(2);
+        assertThat(cache.get(1).getVersion()).isEqualTo(2);
     }
 
     @Test
@@ -74,18 +75,4 @@ class CacheTest {
         boolean result = cache.delete(updateModelB);
         assertThat(result).isTrue();
     }
-
-    @Test
-    public void whenDeleteThrowsError() {
-        Base updateModelA = new Base(1, 1);
-        updateModelA.setName("TestA");
-        Base updateModelB = new Base(1, 1);
-        updateModelB.setName("TestB");
-        cache.update(updateModelA);
-        assertThatThrownBy(() -> cache.delete(updateModelB))
-                .isInstanceOf(OptimisticException.class)
-                .hasMessage("Versions are not equal");
-    }
-
-
 }
