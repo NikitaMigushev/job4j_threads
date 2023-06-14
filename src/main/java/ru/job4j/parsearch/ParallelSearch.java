@@ -48,11 +48,7 @@ public class ParallelSearch {
             rightTask.fork();
             int leftResult = leftTask.join();
             int rightResult = rightTask.join();
-            if (leftResult != -1 || rightResult != -1) {
                 return Math.max(leftResult, rightResult);
-            } else {
-                return rightResult;
-            }
         }
 
         private int linearIndexOfRange() {
