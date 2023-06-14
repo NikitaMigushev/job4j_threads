@@ -2,8 +2,7 @@ package ru.job4j.pools;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RolColSumTest {
     @Test
@@ -14,7 +13,7 @@ class RolColSumTest {
                 {7, 8, 9}
         };
 
-        RolColSum.Sums[] sums = RolColSum.sum(matrix);
+        Sums[] sums = RolColSum.sum(matrix);
 
         assertThat(sums).hasSize(3);
         assertThat(sums[0].getRowSum()).isEqualTo(6);
@@ -33,7 +32,7 @@ class RolColSumTest {
                 {7, 8, 9}
         };
 
-        RolColSum.Sums[] sums = RolColSum.asyncSum(matrix);
+        Sums[] sums = RolColSum.asyncSum(matrix);
 
         assertThat(sums).hasSize(3);
         assertThat(sums[0].getRowSum()).isEqualTo(6);

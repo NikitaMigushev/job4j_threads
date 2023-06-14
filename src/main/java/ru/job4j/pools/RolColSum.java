@@ -6,23 +6,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class RolColSum {
-    public static class Sums {
-        private int rowSum;
-        private int colSum;
-
-        public Sums(int rowSum, int colSum) {
-            this.rowSum = rowSum;
-            this.colSum = colSum;
-        }
-
-        public int getRowSum() {
-            return rowSum;
-        }
-
-        public int getColSum() {
-            return colSum;
-        }
-    }
 
     public static Sums[] sum(int[][] matrix) {
         int size = matrix.length;
