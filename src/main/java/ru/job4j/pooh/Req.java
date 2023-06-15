@@ -15,9 +15,10 @@ public class Req {
 
     public static Req of(String content) {
         String[] lines = content.split(System.lineSeparator());
-        String requestType = lines[0].split("/")[0].split(" ")[0];
-        String poohMode = lines[0].split("/")[1].split(" ")[0];
-        String sourceName = lines[0].split("/")[2].split(" ")[0].split(" ")[0];
+        String[] parts = lines[0].split("/|\\s+");
+        String requestType = parts[0];
+        String poohMode = parts[2];
+        String sourceName = parts[3];
         String param = "";
         if ("POST".equals(requestType)) {
             param = lines[7];
